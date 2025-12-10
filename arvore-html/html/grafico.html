@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico Financeiro Centralizado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-light">
+
+    <div class="container-fluid p-4">
+        
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-9">
+                
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white text-center py-3">
+                        <h4 class="mb-0 fw-bold">📊 Comparativo de Gastos por Secretaria</h4>
+                    </div>
+                    <div class="card-body bg-white p-4">
+                        <div style="height: 600px;">
+                            <canvas id="graficoGastos"></canvas>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light text-muted text-center small">
+                        * Valores em Reais (R$) referentes ao Saldo Total anual.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const labels = [
+            'Fundo de Saúde', 'Fundo de Assist. Social', 'Fundo de Educação', 'Gabinete do Prefeito',
+            'Sec. do Comércio', 'Sec. Mulher e Cidadania', 'Sec. Agricultura', 'Sec. Cultura',
+            'Sec. Educação', 'Sec. Infraestrutura', 'Sec. Planejamento', 'Sec. Saúde',
+            'Sec. Esporte', 'Sec. Fazenda', 'Sec. Meio Ambiente', 'Sec. Des. Econômico', 'Sec. Governo'
+        ];
+
+        const dataValues = [
+            8643444.36, 511303.28, 6603162.22, 134334.08, 8994.54, 20685.27, 46232.42, 
+            1007701.94, 1245845.23, 3863884.18, 1686049.72, 931260.14, 628846.40, 
+            83193.17, 22953.23, 104759.50, 122322.30
+        ];
+
+        const ctx = document.getElementById('graficoGastos').getContext('2d');
+        
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Saldo Total',
+                    data: dataValues,
+                    backgroundColor: '#0d6efd', // Azul Primary
+                    borderRadius: 4, // Bordas levemente arredondadas nas barras
+                    borderWidth: 1,
+                    borderColor: '#0a58ca',
+                    hoverBackgroundColor: '#ffc107', // Amarelo Warning
+                    hoverBorderColor: '#e0a800',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Permite que o gráfico preencha a altura da div pai
+                layout: {
+                    padding: { top: 20, bottom: 10, left: 10, right: 10 }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        // Configuração para mostrar valores até 9 Milhões com intervalos detalhados
+                        max: 9000000, 
+                        ticks: {
+                            // Intervalo fixo de 500.000 para criar as linhas de referência que você pediu
+                            // Isso mostrará: 0, 500k, 1M, 1.5M ... 3M ... 5M ... 8.5M, 9M
+                            stepSize: 500000, 
+                            color: '#6c757d',
+                            font: { size: 11 },
+                            callback: function(value) {
+                                // Formata para R$ abreviado para economizar espaço (ex: 1 M, 500 mil)
+                                if (value >= 1000000) return 'R$ ' + (value/1000000) + ' M';
+                                if (value >= 1000) return 'R$ ' + (value/1000) + ' mil';
+                                return value;
+                            }
+                        },
+                        grid: {
+                            color: '#e9ecef', // Cor suave para as linhas horizontais
+                            borderDash: [5, 5] // Linhas tracejadas para ficar mais moderno
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: {
+                            color: '#495057',
+                            fw: 'bold',
+                            autoSkip: false,
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        backgroundColor: 'rgba(13, 110, 253, 0.9)', // Azul transparente
+                        titleColor: '#fff',
+                        bodyFont: { size: 14 },
+                        padding: 12,
+                        callbacks: {
+                            label: function(context) {
+                                // Tooltip completa com o valor exato em Reais
+                                return ' Total: ' + new Intl.NumberFormat('pt-BR', { 
+                                    style: 'currency', currency: 'BRL' 
+                                }).format(context.raw);
+                            }
+                        }
+                    },
+                    legend: { display: false } // Remove legenda duplicada
+                }
+            }
+        });
+    </script>
+</body>
+</html>

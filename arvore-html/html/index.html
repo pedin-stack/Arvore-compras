@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Gastos por Secretaria</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Pequeno ajuste para garantir que a tabela não quebre em telas pequenas e mantenha o cabeçalho legível */
+        th { font-size: 0.9rem; vertical-align: middle !important; }
+        td { font-size: 0.85rem; vertical-align: middle !important; white-space: nowrap; }
+    </style>
+</head>
+<body class="bg-light font-monospace">
+
+    <div class="container-fluid p-4">
+        
+        <h2 class="text-primary fw-bold mb-4 border-bottom border-warning border-3 pb-2">
+            Relatório Financeiro Anual
+        </h2>
+
+        <div class="table-responsive shadow bg-white rounded">
+            <table class="table table-bordered table-striped table-hover mb-0">
+                <thead class="bg-primary text-white text-center">
+                    <tr>
+                        <th scope="col" class="py-3 bg-primary text-white" style="min-width: 350px;">DEPARTAMENTO / SECRETARIA</th>
+                        <th scope="col" class="bg-primary text-white">Jan.</th>
+                        <th scope="col" class="bg-primary text-white">Fev.</th>
+                        <th scope="col" class="bg-primary text-white">Mar.</th>
+                        <th scope="col" class="bg-primary text-white">Abr.</th>
+                        <th scope="col" class="bg-primary text-white">Mai.</th>
+                        <th scope="col" class="bg-primary text-white">Jun.</th>
+                        <th scope="col" class="bg-primary text-white">Jul.</th>
+                        <th scope="col" class="bg-primary text-white">Ago.</th>
+                        <th scope="col" class="bg-primary text-white">Set.</th>
+                        <th scope="col" class="bg-primary text-white">Out.</th>
+                        <th scope="col" class="bg-primary text-white">Nov.</th>
+                        <th scope="col" class="bg-primary text-white">Dez.</th>
+                        <th scope="col" class="bg-primary text-white fw-bold">Saldo Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center fw-bold text-primary">
+                            FUNDO DE SAÚDE
+                            <a href="fundo-de-saude.html" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 527.476,55</td>
+                        <td class="text-end">R$ 652.802,42</td>
+                        <td class="text-end">R$ 674.451,33</td>
+                        <td class="text-end">R$ 956.235,56</td>
+                        <td class="text-end">R$ 1.224.228,48</td>
+                        <td class="text-end">R$ 850.131,30</td>
+                        <td class="text-end">R$ 1.157.489,50</td>
+                        <td class="text-end">R$ 546.092,65</td>
+                        <td class="text-end">R$ 1.052.488,72</td>
+                        <td class="text-end">R$ 728.222,32</td>
+                        <td class="text-end">R$ 273.825,53</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 8.643.444,36</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center fw-bold text-secondary">
+                            FUNDO DE ASSISTÊNCIA SOCIAL
+                            <a href="detalhes_social.html" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 14.769,39</td>
+                        <td class="text-end">R$ 27.516,64</td>
+                        <td class="text-end">R$ 44.403,43</td>
+                        <td class="text-end">R$ 71.404,33</td>
+                        <td class="text-end">R$ 31.243,60</td>
+                        <td class="text-end">R$ 62.354,97</td>
+                        <td class="text-end">R$ 34.495,34</td>
+                        <td class="text-end">R$ 35.503,14</td>
+                        <td class="text-end">R$ 51.187,96</td>
+                        <td class="text-end">R$ 105.257,19</td>
+                        <td class="text-end">R$ 33.167,29</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 511.303,28</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center fw-bold text-secondary">
+                            FUNDO DE EDUCAÇÃO
+                            <a href="detalhes_edu_fundo.html" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 611.740,49</td>
+                        <td class="text-end">R$ 436.752,71</td>
+                        <td class="text-end">R$ 917.506,08</td>
+                        <td class="text-end">R$ 474.731,03</td>
+                        <td class="text-end">R$ 230.611,22</td>
+                        <td class="text-end">R$ 349.782,69</td>
+                        <td class="text-end">R$ 1.396.466,56</td>
+                        <td class="text-end">R$ 353.962,28</td>
+                        <td class="text-end">R$ 563.859,02</td>
+                        <td class="text-end">R$ 938.604,36</td>
+                        <td class="text-end">R$ 329.145,78</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 6.603.162,22</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            GABINETE DO PREFEITO
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 21.066,00</td>
+                        <td class="text-end">R$ 90.967,30</td>
+                        <td class="text-end">R$ 2.098,81</td>
+                        <td class="text-end">R$ 2.624,48</td>
+                        <td class="text-end">R$ 1.233,10</td>
+                        <td class="text-end">R$ 2.367,01</td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end">R$ 4.752,00</td>
+                        <td class="text-end">R$ 2.090,91</td>
+                        <td class="text-end">R$ 7.134,47</td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 134.334,08</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SEC DO COMÉRCIO
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end">R$ 856,12</td>
+                        <td class="text-end">R$ 6.683,57</td>
+                        <td class="text-end">R$ 568,85</td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end">R$ 886,00</td>
+                        <td class="text-end"></td>
+                        <td class="text-end"></td>
+                        <td class="text-end"></td>
+                        <td class="text-end"></td>
+                        <td class="text-end"></td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 8.994,54</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SECRETARIA DA MULHER E DA CIDADANIA
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end">R$ 3.526,45</td>
+                        <td class="text-end">R$ 353,35</td>
+                        <td class="text-end">R$ 904,91</td>
+                        <td class="text-end">R$ 2.761,90</td>
+                        <td class="text-end">R$ 2.340,17</td>
+                        <td class="text-end">R$ 2.110,76</td>
+                        <td class="text-end">R$ 1.963,09</td>
+                        <td class="text-end">R$ 3.081,46</td>
+                        <td class="text-end">R$ 1.560,96</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 20.685,27</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SECRETARIA DE AGRICULTURA E POLÍTICA RURAL
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 2.685,42</td>
+                        <td class="text-end">R$ 4.025,03</td>
+                        <td class="text-end">R$ 4.694,73</td>
+                        <td class="text-end">R$ 2.503,16</td>
+                        <td class="text-end">R$ 1.335,34</td>
+                        <td class="text-end">R$ 419,10</td>
+                        <td class="text-end">R$ 26.127,11</td>
+                        <td class="text-end">R$ 2.037,82</td>
+                        <td class="text-end">R$ 543,42</td>
+                        <td class="text-end">R$ 1.622,69</td>
+                        <td class="text-end">R$ 238,60</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 46.232,42</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SECRETARIA DA CULTURA
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 209,55</td>
+                        <td class="text-end">R$ 1.860,56</td>
+                        <td class="text-end">R$ 531,30</td>
+                        <td class="text-end">R$ 268.004,00</td>
+                        <td class="text-end">R$ 261.102,63</td>
+                        <td class="text-end">R$ 1.590,36</td>
+                        <td class="text-end">R$ 442.464,22</td>
+                        <td class="text-end">R$ 23.432,64</td>
+                        <td class="text-end">R$ 7.140,86</td>
+                        <td class="text-end">R$ 397,10</td>
+                        <td class="text-end">R$ 968,72</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 1.007.701,94</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SECRETARIA DE EDUCAÇÃO
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end">R$ 6.028,77</td>
+                        <td class="text-end">R$ 99.920,85</td>
+                        <td class="text-end">R$ 103.421,16</td>
+                        <td class="text-end">R$ 159.881,72</td>
+                        <td class="text-end">R$ 125.670,83</td>
+                        <td class="text-end">R$ 198.719,68</td>
+                        <td class="text-end">R$ 22.899,28</td>
+                        <td class="text-end">R$ 27.338,39</td>
+                        <td class="text-end">R$ 27.006,70</td>
+                        <td class="text-end">R$ 474.957,85</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 1.245.845,23</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SECRETARIA DE INFRA-ESTRUTURA E SERVIÇOS PÚBLICOS
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 35.181,60</td>
+                        <td class="text-end">R$ 1.455.319,03</td>
+                        <td class="text-end">R$ 314.966,69</td>
+                        <td class="text-end">R$ 176.187,49</td>
+                        <td class="text-end">R$ 195.977,58</td>
+                        <td class="text-end">R$ 310.475,30</td>
+                        <td class="text-end">R$ 238.853,81</td>
+                        <td class="text-end">R$ 269.345,41</td>
+                        <td class="text-end">R$ 328.791,36</td>
+                        <td class="text-end">R$ 262.296,69</td>
+                        <td class="text-end">R$ 276.489,22</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 3.863.884,18</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SECRETARIA DE PLANEJAMENTO E ADMINISTRAÇÃO
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 43.920,96</td>
+                        <td class="text-end">R$ 191.561,45</td>
+                        <td class="text-end">R$ 146.691,00</td>
+                        <td class="text-end">R$ 150.178,69</td>
+                        <td class="text-end">R$ 149.524,69</td>
+                        <td class="text-end">R$ 130.816,88</td>
+                        <td class="text-end">R$ 139.288,53</td>
+                        <td class="text-end">R$ 17.027,25</td>
+                        <td class="text-end">R$ 329.421,40</td>
+                        <td class="text-end">R$ 215.131,38</td>
+                        <td class="text-end">R$ 172.487,49</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 1.686.049,72</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SECRETARIA DE SAÚDE
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 69.680,32</td>
+                        <td class="text-end">R$ 10.937,72</td>
+                        <td class="text-end">R$ 50.049,17</td>
+                        <td class="text-end">R$ 97.794,95</td>
+                        <td class="text-end">R$ 31.290,76</td>
+                        <td class="text-end">R$ 172.196,15</td>
+                        <td class="text-end">R$ 198.037,35</td>
+                        <td class="text-end">R$ 57.173,38</td>
+                        <td class="text-end">R$ 80.565,21</td>
+                        <td class="text-end">R$ 84.485,09</td>
+                        <td class="text-end">R$ 79.050,04</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 931.260,14</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SECRETARIA DO ESPORTE
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 10.469,10</td>
+                        <td class="text-end">R$ 13.479,60</td>
+                        <td class="text-end">R$ 78.411,43</td>
+                        <td class="text-end">R$ 8.855,56</td>
+                        <td class="text-end">R$ 12.678,10</td>
+                        <td class="text-end">R$ 73.260,40</td>
+                        <td class="text-end">R$ 394.975,16</td>
+                        <td class="text-end">R$ 12.956,48</td>
+                        <td class="text-end">R$ 3.412,78</td>
+                        <td class="text-end">R$ 17.634,25</td>
+                        <td class="text-end">R$ 2.713,54</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 628.846,40</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SECRETARIA DA FAZENDA
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 2.815,10</td>
+                        <td class="text-end">R$ 10.022,50</td>
+                        <td class="text-end">R$ 6.881,36</td>
+                        <td class="text-end">R$ 3.460,23</td>
+                        <td class="text-end">R$ 38.535,11</td>
+                        <td class="text-end">R$ 5.390,71</td>
+                        <td class="text-end">R$ 1.930,90</td>
+                        <td class="text-end">R$ 2.014,07</td>
+                        <td class="text-end">R$ 7.960,99</td>
+                        <td class="text-end">R$ 4.182,20</td>
+                        <td class="text-end"></td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 83.193,17</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SECRETARIA DO MEIO AMBIENTE
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 877,08</td>
+                        <td class="text-end">R$ 500,28</td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end">R$ 1.451,89</td>
+                        <td class="text-end">R$ 1.588,55</td>
+                        <td class="text-end">R$ 886,00</td>
+                        <td class="text-end">R$ 8.551,53</td>
+                        <td class="text-end">R$ 8.244,80</td>
+                        <td class="text-end">R$ 446,00</td>
+                        <td class="text-end">R$ 407,10</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light">R$ 22.953,23</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SECRETARIA DO DESENVOLVIMENTO ECONÔMICO
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end">R$ 296,32</td>
+                        <td class="text-end">R$ -</td>
+                        <td class="text-end">R$ 850,40</td>
+                        <td class="text-end">R$ 143,80</td>
+                        <td class="text-end">R$ 143,80</td>
+                        <td class="text-end">R$ 101.019,10</td>
+                        <td class="text-end">R$ 177,20</td>
+                        <td class="text-end">R$ 1.216,90</td>
+                        <td class="text-end">R$ 911,98</td>
+                        <td class="text-end fw-bold bg-light">R$ 104.759,50</td>
+                    </tr>
+
+                    <tr>
+                        <td class="d-flex justify-content-between align-items-center text-secondary">
+                            SECRETARIA DE GOVERNO
+                            <a href="#" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Detalhar</a>
+                        </td>
+                        <td class="text-end">R$ 3.205,48</td>
+                        <td class="text-end">R$ 590,91</td>
+                        <td class="text-end">R$ 4.168,41</td>
+                        <td class="text-end">R$ 2.276,21</td>
+                        <td class="text-end">R$ 769,35</td>
+                        <td class="text-end">R$ 557,84</td>
+                        <td class="text-end">R$ 119,30</td>
+                        <td class="text-end">R$ 1.212,21</td>
+                        <td class="text-end">R$ 84.257,84</td>
+                        <td class="text-end">R$ 24.613,26</td>
+                        <td class="text-end">R$ 551,50</td>
+                        <td class="text-end"></td>
+                        <td class="text-end fw-bold bg-light"></td> </tr>
+
+                </tbody>
+                <tfoot class="bg-primary text-white">
+                    <tr>
+                        <td colspan="13" class="text-end fw-bold fs-5 py-3">TOTAL GERAL:</td>
+                        <td class="text-end fw-bold fs-5 py-3 bg-warning text-dark border-0">R$ 25.542.649,68</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+ <a href="grafico.html" target="_blank" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2 shadow-sm">Ver gráfico</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

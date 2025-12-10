@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhamento - Fundo de Saúde</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Ajustes de fonte para a tabela densa */
+        th { font-size: 0.8rem; vertical-align: middle !important; white-space: nowrap; }
+        td { font-size: 0.75rem; vertical-align: middle !important; white-space: nowrap; }
+        
+        /* Barra de rolagem personalizada para tabelas longas */
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-responsive::-webkit-scrollbar-thumb {
+            background-color: #0d6efd;
+            border-radius: 4px;
+        }
+        .table-responsive::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body class="bg-light font-monospace">
+
+    <div class="container-fluid p-4">
+        
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 class="text-primary fw-bold border-bottom border-warning border-3 pb-2 d-inline-block">
+                    Fundo de Saúde - Gasto Mensal por Fornecedor
+                </h2>
+                <a href="index.html" class="btn btn-outline-secondary btn-sm d-block mt-2" style="width: fit-content; margin: 0 auto;">&larr; Voltar para Visão Geral</a>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-white border-bottom-0 pt-4 px-4">
+                        <h4 class="text-secondary fw-bold">Tabela de Dados Financeiros</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover mb-0" id="tabelaFornecedores">
+                                <thead class="bg-primary text-white text-center">
+                                    <tr>
+                                        <th class="bg-primary text-white py-3">FORNECEDOR</th>
+                                        <th class="bg-primary text-white">Jan</th>
+                                        <th class="bg-primary text-white">Fev</th>
+                                        <th class="bg-primary text-white">Mar</th>
+                                        <th class="bg-primary text-white">Abr</th>
+                                        <th class="bg-primary text-white">Mai</th>
+                                        <th class="bg-primary text-white">Jun</th>
+                                        <th class="bg-primary text-white">Jul</th>
+                                        <th class="bg-primary text-white">Ago</th>
+                                        <th class="bg-primary text-white">Set</th>
+                                        <th class="bg-primary text-white">Out</th>
+                                        <th class="bg-primary text-white">Nov</th>
+                                        <th class="bg-primary text-white">Dez</th>
+                                        <th class="bg-primary text-white fw-bold bg-warning text-dark">TOTAL ANUAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabelaBody">
+                                    </tbody>
+                                <tfoot class="bg-primary text-white">
+                                    <tr>
+                                        <td class="text-end fw-bold py-2">TOTAL MENSAL:</td>
+                                        <td id="total-0" class="text-end fw-bold small"></td>
+                                        <td id="total-1" class="text-end fw-bold small"></td>
+                                        <td id="total-2" class="text-end fw-bold small"></td>
+                                        <td id="total-3" class="text-end fw-bold small"></td>
+                                        <td id="total-4" class="text-end fw-bold small"></td>
+                                        <td id="total-5" class="text-end fw-bold small"></td>
+                                        <td id="total-6" class="text-end fw-bold small"></td>
+                                        <td id="total-7" class="text-end fw-bold small"></td>
+                                        <td id="total-8" class="text-end fw-bold small"></td>
+                                        <td id="total-9" class="text-end fw-bold small"></td>
+                                        <td id="total-10" class="text-end fw-bold small"></td>
+                                        <td id="total-11" class="text-end fw-bold small"></td>
+                                        <td id="total-geral" class="text-end fw-bold bg-warning text-dark"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-11">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h5 class="mb-0 fw-bold text-center">📊 Comparativo Anual por Fornecedor</h5>
+                    </div>
+                    <div class="card-body bg-white p-4">
+                        <div style="height: 600px;">
+                            <canvas id="graficoFornecedores"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>  
+
+    </div>
+
+    <script>
+        // --- 1. DADOS DOS FORNECEDORES (Transcritos da Imagem) ---
+        const rawData = [
+            { name: "4 RODAS", values: [143611.49, 154677.18, 130428.29, 173873.11, 177818.22, 301604.42, 154810.49, 187187.44, 195288.82, 199780.62, 0, 0] },
+            { name: "CF MED", values: [12990.00, 6424.20, 77576.57, 339985.54, 66151.39, 93603.52, 12613.09, 163299.63, 123309.73, 0, 0, 0] },
+            { name: "CR TEXEIRA", values: [111632.29, 9370.33, 75370.38, 35709.44, 0, 5006.61, 2610.93, 0, 0, 0, 0, 0] },
+            { name: "CASA MEDEIROS", values: [0, 0, 0, 0, 0, 5829.66, 4302.69, 0, 0, 0, 0, 0] },
+            { name: "CIRUGICA NOVO TEMPO", values: [191397.24, 12990.00, 6424.20, 207417.68, 209176.30, 0, 93401.64, 38590.00, 63575.95, 76906.50, 0, 0] },
+            { name: "CIRUGICA SÃO FELIPE", values: [0, 6230.00, 0, 0, 0, 0, 7100.00, 0, 0, 0, 0, 0] },
+            { name: "CORUMBAU", values: [0, 181273.95, 206372.89, 209893.61, 159423.04, 164531.27, 155275.76, 171192.62, 177194.78, 0, 0, 0] },
+            { name: "EMIGE MATERIAIS", values: [0, 0, 0, 0, 0, 0, 0, 32740.20, 49794.54, 0, 0, 0] },
+            { name: "H.L.M DE SOUZA", values: [1151.80, 2658.00, 2472.38, 5919.28, 0, 0, 5263.64, 4454.75, 3772.04, 0, 0, 0] },
+            { name: "HDS", values: [0, 0, 0, 0, 63615.00, 0, 0, 13580.00, 0, 0, 0, 0] },
+            { name: "MAIS SAÚDE", values: [98256.26, 256318.39, 172193.37, 104910.13, 251731.96, 102559.00, 264927.93, 78881.74, 157762.43, 138826.32, 0, 0] },
+            { name: "MARIA CASSIA", values: [62571.57, 0, 69965.50, 16027.50, 0, 42761.60, 71845.80, 0, 46016.60, 41153.80, 36572.00, 0] },
+            { name: "MARTINS MEDEIROS", values: [0, 0, 0, 0, 0, 0, 2000.92, 5683.20, 0, 2389.88, 0, 0] },
+            { name: "MERCEARIA SÓ MERENDAS", values: [69200.32, 0, 32273.53, 56726.23, 0, 56321.32, 72245.29, 23979.72, 39884.29, 41519.50, 36029.71, 0] },
+            { name: "NC GÁS", values: [2550.00, 7560.00, 0, 7560.00, 0, 0, 0, 3862.30, 3862.30, 4175.50, 0, 0] },
+            { name: "PLATAFORMA EVENTOS", values: [492.80, 6406.40, 1421.20, 18075.20, 1821.60, 238876.00, 3074.80, 1672.02, 7066.40, 4734.40, 1443.20, 0] },
+            { name: "PRIMORDIAL", values: [64327.80, 2745.60, 7355.30, 113781.74, 7526.20, 0, 17691.84, 3148.15, 0, 0, 0, 0] },
+            { name: "SAMTRONIC", values: [0, 6230.00, 0, 0, 0, 0, 0, 7100.00, 0, 7100.00, 0, 0] },
+            { name: "YAGO", values: [0, 12990.00, 3284.00, 3700.00, 0, 0, 39385.62, 8925.75, 165297.41, 43023.33, 0, 0] },
+            { name: "PAPELARIA LIBERDADE", values: [37528.76, 798.59, 2217.25, 4219.33, 17075.73, 1112.50, 26332.05, 3585.20, 4829.25, 0, 0, 0] }
+        ];
+
+        // Formatador de Moeda
+        const formatBRL = (value) => {
+            if (value === 0 || value === null) return "-";
+            return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        };
+
+        // Arrays para o Gráfico
+        const labelsChart = [];
+        const dataChart = [];
+        
+        // Acumuladores para o rodapé da tabela (total mensal de todos fornecedores)
+        const monthlyTotals = Array(12).fill(0);
+        let grandTotal = 0;
+
+        // --- 2. POPULAR TABELA E PREPARAR DADOS DO GRÁFICO ---
+        const tbody = document.getElementById('tabelaBody');
+
+        rawData.forEach(item => {
+            // Calcula o total do fornecedor
+            const totalFornecedor = item.values.reduce((acc, curr) => acc + curr, 0);
+            
+            // Só adiciona se tiver algum gasto
+            if (totalFornecedor > 0) {
+                
+                // Preparar dados para o gráfico
+                labelsChart.push(item.name);
+                dataChart.push(totalFornecedor);
+                grandTotal += totalFornecedor;
+
+                // Criar linha da tabela HTML
+                const tr = document.createElement('tr');
+                
+                // Coluna Nome
+                let rowHtml = `<td class="fw-bold text-secondary text-start">${item.name}</td>`;
+                
+                // Colunas Meses
+                item.values.forEach((val, index) => {
+                    rowHtml += `<td class="text-end">${formatBRL(val)}</td>`;
+                    monthlyTotals[index] += val; // Soma para o rodapé
+                });
+
+                // Coluna Total
+                rowHtml += `<td class="text-end fw-bold bg-light text-primary">${formatBRL(totalFornecedor)}</td>`;
+                
+                tr.innerHTML = rowHtml;
+                tbody.appendChild(tr);
+            }
+        });
+
+        // Preencher Rodapé da Tabela (Totais Mensais)
+        monthlyTotals.forEach((val, index) => {
+            document.getElementById(`total-${index}`).innerText = formatBRL(val);
+        });
+        document.getElementById('total-geral').innerText = formatBRL(grandTotal);
+
+
+        // --- 3. CONFIGURAÇÃO DO GRÁFICO (Chart.js) ---
+        const ctx = document.getElementById('graficoFornecedores').getContext('2d');
+        
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labelsChart,
+                datasets: [{
+                    label: 'Total Gasto (R$)',
+                    data: dataChart,
+                    backgroundColor: '#0d6efd',
+                    borderColor: '#0a58ca',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    hoverBackgroundColor: '#ffc107',
+                    hoverBorderColor: '#e0a800'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: { bottom: 10 }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 50000,
+                            color: '#6c757d',
+                            callback: function(value) {
+                                if (value >= 1000000) return (value/1000000).toLocaleString('pt-BR') + ' M';
+                                if (value >= 1000) return (value/1000).toLocaleString('pt-BR') + ' mil';
+                                return value;
+                            }
+                        },
+                        grid: {
+                            color: '#e9ecef',
+                            borderDash: [5, 5]
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: {
+                            color: '#495057',
+                            autoSkip: false,
+                            maxRotation: 55,
+                            minRotation: 55
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return ' Total: ' + new Intl.NumberFormat('pt-BR', { 
+                                    style: 'currency', currency: 'BRL' 
+                                }).format(context.raw);
+                            }
+                        }
+                    },
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
